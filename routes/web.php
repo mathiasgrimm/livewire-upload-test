@@ -12,6 +12,15 @@ Route::get('/', function () {
 
 Route::get('/test1', Test1::class);
 
+Route::get('/test2', function () {
+    $number = ((int) session()->get('number')) + 1;
+    session()->put('number', $number);
+    return [
+        'number' => $number,
+        'host' => gethostname(),
+    ];
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
