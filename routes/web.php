@@ -7,6 +7,7 @@ use App\Livewire\Test1;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
     return view('welcome');
 })->name('home');
 
@@ -19,6 +20,14 @@ Route::get('/test2', function () {
         'number' => $number,
         'host' => gethostname(),
     ];
+});
+
+Route::get('/testhandlerstats', function () {
+    $response = Http::withOptions([
+        'force_ip_resolve' => 'v4',
+    ])->get('https://google.com');
+    $log = json_encode($response->handlerStats());
+    logger("handlerStatus: {$log}");
 });
 
 Route::view('dashboard', 'dashboard')
