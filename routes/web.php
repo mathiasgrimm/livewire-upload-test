@@ -22,6 +22,10 @@ Route::get('/test2', function () {
     ];
 });
 
+Route::get('/testlocale', function () {
+    return "ÅÄÖ and åäö|ÅÄÖ and åäö";
+});
+
 Route::get('/testhandlerstats', function () {
     $response = Http::withOptions([
         'force_ip_resolve' => 'v4',
