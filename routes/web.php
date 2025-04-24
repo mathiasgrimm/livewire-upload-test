@@ -22,8 +22,16 @@ Route::get('/test2', function () {
     ];
 });
 
-Route::get('/testlocale', function () {
+Route::get('/testlocale1', function () {
     return "ÅÄÖ and åäö|ÅÄÖ and åäö";
+});
+
+Route::get('/testlocale2', function () {
+    echo "ÅÄÖ and åäö|ÅÄÖ and åäö";
+});
+
+Route::get('/testlocale3', function () {
+    return ['messageÅÄÖ and åäö|ÅÄÖ and åäö' => "ÅÄÖ and åäö|ÅÄÖ and åäö"];
 });
 
 Route::get('/testhandlerstats', function () {
