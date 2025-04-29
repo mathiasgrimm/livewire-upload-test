@@ -51,6 +51,10 @@ Route::get('/testhandlerstats', function () {
     logger("handlerStatus: {$log}");
 });
 
+Route::get('/testonlyonstaging', function () {
+    return 'only on staging';
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
