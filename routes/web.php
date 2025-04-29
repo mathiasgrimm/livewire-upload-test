@@ -38,6 +38,10 @@ Route::get('/testlocale4', function () {
     return json_decode('{"message\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6|\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6":"\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6|\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6"}');
 });
 
+Route::get('/testmemorylimit', function () {
+    return ini_get('memory_limit');
+});
+
 
 Route::get('/testhandlerstats', function () {
     $response = Http::withOptions([
