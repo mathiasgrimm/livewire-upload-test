@@ -22,35 +22,6 @@ Route::get('/test2', function () {
     ];
 });
 
-Route::get('/testlocale1', function () {
-    return "ÅÄÖ and åäö|ÅÄÖ and åäö";
-});
-
-Route::get('/testlocale2', function () {
-    echo "ÅÄÖ and åäö|ÅÄÖ and åäö";
-});
-
-Route::get('/testlocale3', function () {
-    return ['messageÅÄÖ and åäö|ÅÄÖ and åäö' => "ÅÄÖ and åäö|ÅÄÖ and åäö"];
-});
-
-Route::get('/testlocale4', function () {
-    return json_decode('{"message\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6|\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6":"\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6|\u00c5\u00c4\u00d6 and \u00e5\u00e4\u00f6"}');
-});
-
-Route::get('/testmemorylimit', function () {
-    return ini_get('memory_limit');
-});
-
-
-Route::get('/testhandlerstats', function () {
-    $response = Http::withOptions([
-        'force_ip_resolve' => 'v4',
-    ])->get('https://google.com');
-    $log = json_encode($response->handlerStats());
-    logger("handlerStatus: {$log}");
-});
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

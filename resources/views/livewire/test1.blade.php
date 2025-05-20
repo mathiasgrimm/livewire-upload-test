@@ -12,6 +12,7 @@
             @endif
 
             <flux:input type="file" wire:model="image" label="Image"/>
+            <flux:button wire:click="resize">Resize</flux:button>
         </div>
     </div>
 </div>
