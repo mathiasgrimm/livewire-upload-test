@@ -20,9 +20,15 @@ class Test1 extends Component
 
     public function resize()
     {
+
         logger('starting...');
+
+        $path = $this->image->getPathname();
+
         $t0 = microtime(true);
-        $image = Image::load($this->image->getPathname());
+
+        logger('path: '.$path);
+        $image = Image::load($path);
         logger('loaded...');
 
         $image->fit(Fit::Contain, desiredWidth: 330, desiredHeight: 162, backgroundColor: 'transparent');
