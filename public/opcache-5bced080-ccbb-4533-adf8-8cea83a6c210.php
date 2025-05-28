@@ -1,5 +1,12 @@
 <?php
 
+if (isset($_GET['raw'])) {
+    echo "<pre>";
+    print_r(opcache_get_status());
+    echo "</pre>";
+    die;
+}
+
 define('THOUSAND_SEPARATOR', true);
 
 if (! extension_loaded('Zend OPcache')) {
