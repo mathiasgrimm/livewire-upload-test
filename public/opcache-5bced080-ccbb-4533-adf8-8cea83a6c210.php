@@ -1,11 +1,8 @@
 <?php
 
-if (isset($_GET['raw'])) {
-    echo "<pre>";
-    print_r(opcache_get_status());
-    echo "</pre>";
-    die;
-}
+echo "<pre>";
+print_r(opcache_get_status());
+echo "</pre><br><br>";
 
 define('THOUSAND_SEPARATOR', true);
 
