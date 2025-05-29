@@ -22,6 +22,13 @@ Route::get('/test2', function () {
     ];
 });
 
+Route::get('/test3', function ($request) {
+    return [
+        'ip' => $request->ip(),
+        'ips' => $request->ip(),
+    ];
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
