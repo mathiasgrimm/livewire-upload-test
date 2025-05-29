@@ -24,8 +24,8 @@ Route::get('/test2', function () {
 
 Route::get('/test3', function ($request) {
     return [
-        'ip' => $request->ip(),
-        'ips' => $request->ip(),
+        'ip' => request()->ip(),
+        'ips' => request()->ip(),
     ];
 });
 
