@@ -60,7 +60,7 @@ Route::get('/testlatency', function () {
         $service['latency']['avg'] = array_sum($service['latency']) / count($service['latency']);
     }
 
-    return $services;
+    return "<pre>" . json_encode($services, JSON_PRETTY_PRINT);
 });
 
 Route::view('dashboard', 'dashboard')
