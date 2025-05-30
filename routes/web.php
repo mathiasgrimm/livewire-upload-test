@@ -41,7 +41,7 @@ Route::get('/testlatency', function () {
         ];
     }
 
-    $redisIps = gethostbynamel(config('database')['redis']['default']['host']);
+    $redisIps = gethostbynamel(str_replace('tls://', '', config('database')['redis']['default']['host']));
     foreach ($redisIps as $redisIp) {
         $services[] = [
             'host' => $redisIp,
