@@ -30,22 +30,25 @@ Route::get('/test3', function () {
 });
 
 Route::get('/testlatency', function () {
-    $services = [
-        'database' => [
-            'host_original' => config('database')['connections'][config('database.default')]['host'],
-            'host' => gethostbynamel(config('database')['connections'][config('database.default')]['host'])[0],
+    $services = [];
+    $databaseIps = gethostbynamel(config('database')['connections'][config('database.default')]['host']);
+
+    foreach ($databaseIps as $databaseIp) {
+        $services[] = [
+            'host' => $databaseIp,
             'port' => config('database')['connections'][config('database.default')]['port'],
             'latency' => [],
-        ],
+        ];
+    }
 
-        'redis' => [
-            'host_original' => config('database')['redis']['default']['host'],
-            'host' => gethostbynamel(config('database')['redis']['default']['host'])[0],
+    $redisIps = gethostbynamel(config('database')['redis']['default']['host']);
+    foreach ($redisIps as $redisIp) {
+        $services[] = [
+            'host' => $redisIp,
             'port' => config('database')['redis']['default']['port'],
             'latency' => [],
-        ],
-    ];
-
+        ];
+    }
 
     foreach ($services as &$service) {
         for ($i = 0; $i < 10; $i++) {
