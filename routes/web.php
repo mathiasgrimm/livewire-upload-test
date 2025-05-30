@@ -29,6 +29,40 @@ Route::get('/test3', function () {
     ];
 });
 
+Route::get('/testlatency', function () {
+    $services = [
+        'database' => [
+            'host' => config('database')['connections'][config('database.default')]['host'],
+            'port' => config('database')['connections'][config('database.default')]['port'],
+            'latency' => [],
+        ],
+
+        'redis' => [
+            'host' => config('database')['redis']['default']['host'],
+            'port' => config('database')['redis']['default']['port'],
+            'latency' => [],
+        ],
+    ];
+
+
+    foreach ($services as &$service) {
+        for ($i = 0; $i < 10; $i++) {
+            $t0 = microtime(true);
+            $fp = @fsockopen($service['host'], $service['port'], $errno, $errstr, 5);
+            $t1 = microtime(true);
+            if ($fp) {
+                @fclose($fp);
+            }
+
+            $service['latency'][] = ($t1 - $t0) * 1000;
+        }
+
+        $service['latency']['avg'] = array_sum($service['latency']) / count($service['latency']);
+    }
+
+    return $services;
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
