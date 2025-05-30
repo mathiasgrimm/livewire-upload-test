@@ -46,15 +46,21 @@ Route::get('/testlatency', function () {
 
 
     foreach ($services as &$service) {
+        $fp = @fsockopen($service['host'], $service['port'], $errno, $errstr, 5);
+
         for ($i = 0; $i < 10; $i++) {
             $t0 = microtime(true);
-            $fp = @fsockopen($service['host'], $service['port'], $errno, $errstr, 5);
+            if (@fwrite($fp, '') === false) {
+                continue 2;
+            };
             $t1 = microtime(true);
-            if ($fp) {
-                @fclose($fp);
-            }
+
 
             $service['latency'][] = ($t1 - $t0) * 1000;
+        }
+
+        if ($fp) {
+            @fclose($fp);
         }
 
         $service['latency']['avg'] = array_sum($service['latency']) / count($service['latency']);
