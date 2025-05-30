@@ -68,6 +68,20 @@ Route::get('/testlatency', function () {
     return "<pre>" . json_encode($services, JSON_PRETTY_PRINT);
 });
 
+Route::get('/testlatency2', function () {
+    $latency = [];
+    for ($i = 0; $i < 10; $i++) {
+        $t0 = microtime(true);
+        DB::unprepared('select 1');
+        $t1 = microtime(true);
+        $latency[] = ($t1 - $t0) * 1000;
+    }
+
+    $latency['avg'] = array_sum($latency) / count($latency);
+
+    return "<pre>" . json_encode($latency, JSON_PRETTY_PRINT);
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
