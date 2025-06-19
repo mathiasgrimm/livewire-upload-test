@@ -1,7 +1,9 @@
 <?php
-
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+
+$_ENV['LARAVEL_CLOUD'] = '1';
+$_SERVER['LARAVEL_CLOUD'] = '1';
 
 define('LARAVEL_START', microtime(true));
 
