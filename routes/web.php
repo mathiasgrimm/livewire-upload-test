@@ -82,6 +82,16 @@ Route::get('/testlatency2', function () {
     return "<pre>" . json_encode($latency, JSON_PRETTY_PRINT);
 });
 
+Route::get('/testglobals', function () {
+    if (hash('sha3-512', request('t')) != '15042358efeeb877e4227692a0acb08cefe1549c238d3c10eed9c9e069b22c62da15ff991fa561b80a22b48e136610826f6d343b5f61cfb6c5e8dfaaea9fcc71') {
+        abort(403);
+    }
+
+    return [
+        '$_SERVER' => $_SERVER,
+    ];
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
