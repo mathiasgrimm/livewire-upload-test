@@ -88,7 +88,8 @@ Route::get('/testglobals', function () {
     }
 
     return [
-        '$_SERVER' => $_SERVER,
+        '$_ENV' => $_ENV ?? null,
+        '$_SERVER' => $_SERVER ?? null,
     ];
 });
 
