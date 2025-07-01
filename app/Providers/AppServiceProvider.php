@@ -11,11 +11,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->booting(static function (): void {
-            if (config('filesystems.laravel_cloud_disk_config')) {
-                $_SERVER['LARAVEL_CLOUD_DISK_CONFIG'] = config('filesystems.laravel_cloud_disk_config');
-            }
-        });
+        // $this->app->booting(static function (): void {
+        //     if (config('filesystems.laravel_cloud_disk_config')) {
+        //         $_SERVER['LARAVEL_CLOUD_DISK_CONFIG'] = config('filesystems.laravel_cloud_disk_config');
+        //     }
+        // });
     }
 
     /**
