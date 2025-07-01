@@ -77,4 +77,6 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
+    'laravel_cloud_disk_config' => env('LARAVEL_CLOUD_DISK_CONFIG'),
+
 ];

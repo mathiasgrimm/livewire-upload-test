@@ -11,7 +11,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-         config(['filesystems.disks.mathias-register' => ['driver' => 's3']]);
+        if (config('filesystems.laravel_cloud_disk_config')) {
+            $_SERVER['LARAVEL_CLOUD_DISK_CONFIG'] = config('filesystems.laravel_cloud_disk_config');
+        }
     }
 
     /**
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        config(['filesystems.disks.mathias-boot' => ['driver' => 's3']]);
+        //
     }
 }
