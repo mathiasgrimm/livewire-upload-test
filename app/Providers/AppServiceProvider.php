@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // config(['filesystems.disks.mathias' => ['driver' => 's3']]);
+         config(['filesystems.disks.mathias-register' => ['driver' => 's3']]);
     }
 
     /**
@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        config(['filesystems.disks.mathias-boot' => ['driver' => 's3']]);
     }
 }
